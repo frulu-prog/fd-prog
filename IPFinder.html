@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon adresse IP</title>
+</head>
+<body>
+    <h2>Votre adresse IP</h2>
+    <hr>
+    <h3 id="avertissement" style="color:red"></h3>
+    <p id="ip">Chargement...</p>
+    <button onclick="changeText()" style="background-color: rebeccapurple; color: azure; border-radius: 5px;">Donne moi mon ip</button>
+    <script>
+        function changeText(){
+            fetch("https://api.ipify.org?format=json")
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("ip").textContent = data.ip;
+                })
+                .catch(() => {
+                    document.getElementById("ip").textContent =
+                        "Impossible de récupérer l'IP.";
+                });
+            document.getElementById("avertissement").innerHTML = "/!&#92; Ne pas partager /!&#92;";
+        }
+    </script>
+</body>
+</html>
